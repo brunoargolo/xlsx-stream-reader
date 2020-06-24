@@ -4,6 +4,14 @@
 
 ======
 
+This is a fork of https://github.com/daspawn/xlsx-stream-reader#readme
+
+I upgraded some packages and added a config option to allow you to choose your tmp folder.
+
+this is usefull for AWS LAMBDA where /tmp only has 512mb, so you can mount an EFS volume to say /mnt/tmp and use that directory with unlimited space.
+
+
+
 Memory efficinet minimalist streaming XLSX reader that can handle piped 
 streams as input. Events are emmited while reading the stream.
 
@@ -25,6 +33,7 @@ Options
 |verbose|true|throw additional exceptions, if `false` - then pass empty string in that places|
 |formatting|true|should cells with combined formats be formatted or not|
 |saxTrim|true|whether or not to trim text and comment nodes|
+|tmpOptions|{}|an options object to be passed to the "tmp" package, eg. to use a folder other than OS tmp directory { tmpdir: "/mnt/tmp" } |
 
 -------
 ```javascript

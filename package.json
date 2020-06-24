@@ -4,12 +4,12 @@
   "description": "Memory efficinet non-blocking/event based streaming XLSX reader",
   "main": "index.js",
   "scripts": {
-    "test": "standard && mocha --timeout 20000 test",
+    "test": "standard && mocha --timeout 30000 test",
     "standard:fix": "standard --fix"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daspawn/xlsx-stream-reader.git"
+    "url": "git+https://github.com/brunoargolo/xlsx-stream-reader.git"
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -23,17 +23,17 @@
   "author": "Brian Taber <btaber@diversecg.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/daspawn/xlsx-stream-reader/issues"
+    "url": "https://github.com/brunoargolo/xlsx-stream-reader/issues"
   },
-  "homepage": "https://github.com/daspawn/xlsx-stream-reader#readme",
+  "homepage": "https://github.com/brunoargolo/xlsx-stream-reader#readme",
   "dependencies": {
     "sax": "^1.2.4",
-    "ssf": "^0.10.2",
-    "tmp": "^0.1.0",
-    "unzipper": "^0.9.11"
+    "ssf": "^0.11.1",
+    "tmp": "^0.2.1",
+    "unzipper": "^0.10.11"
   },
   "devDependencies": {
-    "mocha": "^6.0.2",
+    "mocha": "^8.0.1",
     "standard": "^12.0.1"
   }
 }
