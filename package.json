@@ -1,10 +1,11 @@
 {
   "name": "xlsx-reader-tmp",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Memory efficinet non-blocking/event based streaming XLSX reader, uses /tmp or custom folder store files while reading",
   "main": "index.js",
   "scripts": {
-    "test": "standard && mocha --timeout 30000 test",
+    "test": "standard lib && mocha --timeout 30000 test",
+    "test2": "mocha --timeout 30000 test/test2.js",
     "standard:fix": "standard --fix"
   },
   "repository": {

@@ -6,11 +6,9 @@
 
 This is a fork of https://github.com/daspawn/xlsx-stream-reader#readme
 
-I upgraded some packages and added a config option to allow you to choose your tmp folder.
+I upgraded some packages and added extra config options to allow you to choose your tmp folder and ignore sheets based on their number.
 
-this is usefull for AWS LAMBDA where /tmp only has 512mb, so you can mount an EFS volume to say /mnt/tmp and use that directory with unlimited space.
-
-
+this is usefull for AWS LAMBDA where /tmp only has 512mb, so you can mount an EFS volume to /mnt/tmp and use that directory with unlimited space.
 
 Memory efficinet minimalist streaming XLSX reader that can handle piped 
 streams as input. Events are emmited while reading the stream.
@@ -34,7 +32,8 @@ Options
 |formatting|true|should cells with combined formats be formatted or not|
 |saxTrim|true|whether or not to trim text and comment nodes|
 |tmpOptions|{}|an options object to be passed to the "tmp" package, eg. to use a folder other than OS tmp directory { tmpdir: "/mnt/tmp" } |
-
+|sheetNumbers|[<integer>]|Array with the sheet number to process. This prevents writing to /tmp the sheets what are not needed. Eg. if [1,4] only events for sheets 1 and 4 will be returned. Use only if you're sure the xlsx file will have its internal naming compatible with the order of the sheets. This is not guaranteed by xlsx spec but seems to be  followed by excel and most libs that write xlsx, eg. sheet1.xml might represent sheet 3 but 99.99% of the time it will be sheet 1. |
+|enableCompression|false|If true it used gzip when writing the sheets to /tmp its unclear if this improves or worsens performance, it definaetly requires more cpu/memory, but also less IO to disk.|
 -------
 ```javascript
 const XlsxStreamReader = require("xlsx-stream-reader");

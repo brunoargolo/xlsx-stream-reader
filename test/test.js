@@ -7,7 +7,7 @@ const path = require('path')
 
 describe('The xslx stream parser', function () {
   it('parses large files', function (done) {
-    var workBookReader = new XlsxStreamReader()
+    var workBookReader = new XlsxStreamReader({})
     fs.createReadStream(path.join(__dirname, 'big.xlsx')).pipe(workBookReader)
     workBookReader.on('worksheet', function (workSheetReader) {
       workSheetReader.on('end', function () {
@@ -17,8 +17,23 @@ describe('The xslx stream parser', function () {
       workSheetReader.process()
     })
   })
+  it('Should only read sheets from sheetNumbers if defined', function (done) {
+    var workBookReader = new XlsxStreamReader({sheetNumbers: [2]})
+    var sheets = []
+    workBookReader.on('end', function () {      
+      assert(sheets.length === 1)
+      done()
+    })
+
+    fs.createReadStream(path.join(__dirname, 'big_with_2_sheets.xlsx'))
+      .pipe(workBookReader)
+      workBookReader.on('worksheet', function (workSheetReader) {
+        sheets.push(workSheetReader.name)        
+        workSheetReader.skip()
+      })
+  })
   it('supports predefined formats', function (done) {
-    var workBookReader = new XlsxStreamReader()
+    var workBookReader = new XlsxStreamReader({ enableCompression: true })
     fs.createReadStream(path.join(__dirname, 'predefined_formats.xlsx')).pipe(workBookReader)
     const rows = []
     workBookReader.on('worksheet', function (workSheetReader) {
